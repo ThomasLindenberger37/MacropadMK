@@ -1,0 +1,36 @@
+# --- KiCad Dateien (Allgemein) ---
+*.bak
+*.lck
+*.kicad_pcb-bak
+*.kicad_sch-bak
+_autosave-*
+fp-info-cache
+python_konsole_history
+
+# --- Backups (Sehr wichtig!) ---
+# Ignoriert den kompletten Backup-Ordner, den KiCad automatisch anlegt
+*-backups/
+# Ignoriert den lokalen KiCad-History-Ordner
+.history/
+# Ignoriert alle Zip-Dateien (da Backups oft als Zip gespeichert werden)
+*.zip
+
+# --- KiBot / Fertigung ---
+# Wir ignorieren den kompletten build-Ordner, da dieser nur 
+# lokal oder in der Cloud temporär generiert wird.
+build/
+Generated/
+
+# --- Assets (AUSNAHME) ---
+# Wir wollen, dass der assets-Ordner und die Bilder darin 
+# trotz anderer Regeln (wie *.png Verboten) getrackt werden.
+!assets/
+!assets/*.png
+!assets/*.svg
+
+# --- Betriebssysteme ---
+.DS_Store
+Thumbs.db
+
+*.xml
+Fabrication/

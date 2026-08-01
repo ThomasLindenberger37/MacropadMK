@@ -1,0 +1,39 @@
+name: Generate Fabrication Files
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  kibot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          submodules: recursive
+
+      - name: Run KiBot
+        run: |
+          chmod +x ./scripts/fabrication.sh
+          CONFIG_FILE=project.config.yaml ./scripts/fabrication.sh
+
+      - name: Set artifact name
+        id: artifact_name
+        env:
+          HEAD_REF: ${{ github.head_ref }}
+          REF_NAME: ${{ github.ref_name }}
+          REF: ${{ github.ref }}
+        run: |
+          BRANCH="${HEAD_REF:-${REF_NAME:-${REF}}}"
+          SAFE_BRANCH=$(echo "$BRANCH" | sed 's|/|-|g')
+          echo "name=Fabrication-Data-${SAFE_BRANCH}" >> "$GITHUB_OUTPUT"
+
+      - name: Upload Fabrication Folder
+        if: success()
+        uses: actions/upload-artifact@v7
+        with:
+          name: ${{ steps.artifact_name.outputs.name }}
+          path: Fabrication/

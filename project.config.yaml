@@ -1,0 +1,5 @@
+board_name: MacropadMK
+output_name: MacropadMK
+thickness: 1.6
+mechanical_tools: T5
+docker_image: ghcr.io/inti-cmnb/kicad10_auto_full:latest

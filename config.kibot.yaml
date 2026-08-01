@@ -1,0 +1,54 @@
+kibot:
+  version: 1
+
+outputs:
+  # 1. GERBER FILES
+  - name: 'Gerber'
+    comment: "Gerber files for KiCad 10 project"
+    type: gerber
+    dir: 'Fabrication/Gerber'
+    options:
+      exclude_edge_layer: false
+      use_aux_axis_as_origin: true
+      plot_footprint_refs: true
+      plot_footprint_values: false
+
+  # 2. DRILL FILES
+  - name: 'Excellon'
+    comment: "Drill files"
+    type: excellon
+    dir: 'Fabrication/Drill'
+    options:
+      use_aux_axis_as_origin: true
+
+  # 3. ZIP ARCHIVE
+  - name: 'Gerber_Pack'
+    comment: "Zipped Gerber and Drill files"
+    type: compress
+    dir: 'Fabrication'
+    options:
+      format: ZIP
+      files:
+        - from_output: Gerber
+          dest: /
+        - from_output: Excellon
+          dest: /
+
+  # 4. BILL OF MATERIALS (BoM)
+  - name: 'BoM'
+    comment: "BoM for MacropadMK"
+    type: bom
+    dir: 'Fabrication/BoM'
+    options:
+      format: CSV
+
+  # 5. PICK AND PLACE (Position)
+  - name: 'Position'
+    comment: "Placement files"
+    type: position
+    dir: 'Fabrication/Placement'
+    options:
+      format: ASCII
+      units: millimeters
+      separate_files_for_front_and_back: true
+      only_smd: true
