@@ -680,7 +680,7 @@
         "uuid": "8aac3481-571f-4367-bd23-185f621364a9"
       }
     ],
-    "used_designators": "SW1",
+    "used_designators": "SW1-4,D3",
     "variants": []
   },
   "sheets": [
