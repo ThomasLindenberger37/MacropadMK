@@ -2,4 +2,5 @@
   (version 7)
   (lib (name "MacropadMK_Custom_Symbols")(type "KiCad")(uri "${KIPRJMOD}/libraries/MacropadMK_Custom_Symbols.kicad_sym")(options "")(descr "Project-local custom symbol library"))
   (lib (name "MacropadMK_Sensor_Symbols")(type "KiCad")(uri "${KIPRJMOD}/libraries/MacropadMK_Sensor_Symbols.kicad_sym")(options "")(descr "Project-local sensor symbol library"))
+  (lib (name "SSD1306_OLED")(type "KiCad")(uri "${KIPRJMOD}/libraries/SSD1306_OLED.kicad_sym")(options "")(descr "Project-local SSD1306 OLED module symbol"))
 )

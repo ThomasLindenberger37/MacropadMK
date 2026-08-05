@@ -1,0 +1,346 @@
+(footprint "OLED_SSD1306_0.91in_128x32_I2C"
+	(version 20260206)
+	(generator "pcbnew")
+	(generator_version "10.0")
+	(layer "F.Cu")
+	(descr "SSD1306 0.91-inch 128x32 OLED breakout module, 38x12 mm, 4-pin I2C")
+	(tags "OLED SSD1306 0.91in 128x32 I2C breakout module")
+	(property "Reference" "DS**"
+		(at 19 -1.5 0)
+		(layer "F.SilkS")
+		(uuid "d5bef474-d052-49a7-bf12-b82ddbbc2106")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "OLED_SSD1306_0.91in_128x32_I2C"
+		(at 19 13.5 0)
+		(layer "F.Fab")
+		(uuid "6d59fc5e-d1fb-4642-bd9a-2078f98a0013")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "a0608cc3-dca0-4f7f-8dbb-19ea09a96c9f")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "b8846bdf-817d-4728-8dd7-72505a55d490")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(attr through_hole)
+	(duplicate_pad_numbers_are_jumpers no)
+	(fp_line
+		(start 0 0)
+		(end 38 0)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "4f10abe8-2600-40e5-b0e6-32a59367c163")
+	)
+	(fp_line
+		(start 0 12)
+		(end 0 0)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "30c1bae3-7bfb-4f8e-b84b-22599af1ffda")
+	)
+	(fp_line
+		(start 5 0.25)
+		(end 35 0.25)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "e0066f28-da5b-460a-ac9a-39200ac97b1e")
+	)
+	(fp_line
+		(start 5 11.75)
+		(end 5 0.25)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "97d96ef5-e5ca-4ea2-a96e-99f418193dd1")
+	)
+	(fp_line
+		(start 35 0.25)
+		(end 35 11.75)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "34d19192-58dd-453f-965e-01e2d701154a")
+	)
+	(fp_line
+		(start 35 11.75)
+		(end 5 11.75)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "2d932f96-585d-434d-8402-0d792f281acf")
+	)
+	(fp_line
+		(start 38 0)
+		(end 38 12)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "e2f71d9c-362d-49e0-b59f-675cfc6afc99")
+	)
+	(fp_line
+		(start 38 12)
+		(end 0 12)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "96a0fab3-41c5-4ab4-8874-addf9d20d5e9")
+	)
+	(fp_line
+		(start -0.25 -0.25)
+		(end 38.25 -0.25)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "4f26a327-d525-4903-8571-25ec37c3e576")
+	)
+	(fp_line
+		(start -0.25 12.25)
+		(end -0.25 -0.25)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "18125b7d-73ed-4452-92b2-f5204dde58b2")
+	)
+	(fp_line
+		(start 38.25 -0.25)
+		(end 38.25 12.25)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "7aa5bddd-c8c6-4ca2-af71-4dd4eda3c14f")
+	)
+	(fp_line
+		(start 38.25 12.25)
+		(end -0.25 12.25)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "651bd3d8-78e7-4a05-a807-bf910b81a077")
+	)
+	(fp_line
+		(start 0 0)
+		(end 38 0)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "2e0f6717-de36-4dcf-92c5-cf15085f3793")
+	)
+	(fp_line
+		(start 0 12)
+		(end 0 0)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "5cce9d54-8a7c-4a6f-804d-fe80ea948947")
+	)
+	(fp_line
+		(start 7.1 2.43)
+		(end 29.48 2.43)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "790fcac3-a7e2-4f7e-829b-caa00c93e989")
+	)
+	(fp_line
+		(start 7.1 8.01)
+		(end 7.1 2.43)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "8a8b0e65-71eb-499a-a8c0-d941d2f7314e")
+	)
+	(fp_line
+		(start 29.48 2.43)
+		(end 29.48 8.01)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "c6dfd080-02d3-4bc8-a04d-bae61272db44")
+	)
+	(fp_line
+		(start 29.48 8.01)
+		(end 7.1 8.01)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "cb433070-1015-49ef-9a91-79848c06f96d")
+	)
+	(fp_line
+		(start 38 0)
+		(end 38 12)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "77653ce9-dec7-460e-8799-2fe4c0bd3f2b")
+	)
+	(fp_line
+		(start 38 12)
+		(end 0 12)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "6d586b84-1d07-4c34-ab9d-db15a28fc860")
+	)
+	(fp_text user "SDA"
+		(at 3.6 2.19 0)
+		(layer "F.SilkS")
+		(uuid "c2ec62a3-adb9-4a0d-b9e8-edf706267a1b")
+		(effects
+			(font
+				(size 0.7 0.7)
+				(thickness 0.1)
+			)
+			(justify left)
+		)
+	)
+	(fp_text user "SCL"
+		(at 3.6 4.73 0)
+		(layer "F.SilkS")
+		(uuid "e3ff743b-9524-428a-a11b-6f499a02d9bb")
+		(effects
+			(font
+				(size 0.7 0.7)
+				(thickness 0.1)
+			)
+			(justify left)
+		)
+	)
+	(fp_text user "VCC"
+		(at 3.6 7.27 0)
+		(layer "F.SilkS")
+		(uuid "b1532582-fa38-47d7-871d-9846d9041ca5")
+		(effects
+			(font
+				(size 0.7 0.7)
+				(thickness 0.1)
+			)
+			(justify left)
+		)
+	)
+	(fp_text user "GND"
+		(at 3.6 9.81 0)
+		(layer "F.SilkS")
+		(uuid "4a62ea06-9f7f-4fcb-8455-4fe354f0c8a5")
+		(effects
+			(font
+				(size 0.7 0.7)
+				(thickness 0.1)
+			)
+			(justify left)
+		)
+	)
+	(pad "1" thru_hole rect
+		(at 1.5 9.81)
+		(size 1.8 1.8)
+		(drill 1)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "7071821a-dbec-43d7-8110-b38c72b4f596")
+	)
+	(pad "2" thru_hole circle
+		(at 1.5 7.27)
+		(size 1.8 1.8)
+		(drill 1)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "e2027f6f-68f4-4599-a774-1a814a69e39e")
+	)
+	(pad "3" thru_hole circle
+		(at 1.5 4.73)
+		(size 1.8 1.8)
+		(drill 1)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "ec3f7483-7c7d-4aee-b54e-5b51fde0fcf5")
+	)
+	(pad "4" thru_hole circle
+		(at 1.5 2.19)
+		(size 1.8 1.8)
+		(drill 1)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "13d47f4a-24c8-4220-8ea2-6537eddd3d40")
+	)
+	(embedded_fonts no)
+	(model "${KIPRJMOD}/libraries/3dmodels/TFT Display 0.69_96x16.STEP"
+		(offset
+			(xyz 16 -6 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz -0 -0 -180)
+		)
+	)
+)
