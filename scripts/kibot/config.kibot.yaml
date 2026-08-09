@@ -1,0 +1,80 @@
+kibot:
+  version: 1
+
+outputs:
+  # 1. GERBER FILES
+  - name: 'Gerber'
+    comment: "Gerber files for KiCad 9 project"
+    type: gerber
+    dir: 'Fabrication/Gerber'
+    options:
+      exclude_edge_layer: false
+      use_aux_axis_as_origin: true
+      plot_footprint_refs: true
+      plot_footprint_values: false
+
+  # 2. DRILL FILES
+  - name: 'Excellon'
+    comment: "Drill files"
+    type: excellon
+    dir: 'Fabrication/Drill'
+    options:
+      use_aux_axis_as_origin: true
+
+  # 3. ZIP ARCHIVE
+  - name: 'Gerber_Pack'
+    comment: "Zipped Gerber and Drill files"
+    type: compress
+    dir: 'Fabrication'
+    options:
+      format: ZIP
+      files:
+        - from_output: Gerber
+          dest: /
+        - from_output: Excellon
+          dest: /
+
+  # 4. BILL OF MATERIALS (BoM)
+  - name: 'BoM'
+    comment: "BoM for ESP32 Shield"
+    type: bom
+    dir: 'Fabrication/BoM'
+    options:
+      format: CSV
+
+  # 5. PICK AND PLACE (Position)
+  - name: 'Position'
+    comment: "Placement files"
+    type: position
+    dir: 'Fabrication/Placement'
+    options:
+      format: ASCII
+      units: millimeters
+      separate_files_for_front_and_back: true
+      only_smd: true
+
+  # 6. STEP – PCB ONLY (GERBER-LIKE BOARD, NO COMPONENTS)
+  - name: 'STEP_PCB'
+    comment: "STEP board model with PCB features (tracks/zones/silk/mask), no components"
+    type: export_3d
+    dir: 'Fabrication/STEP'
+    options:
+      format: step
+      output: '%f-STEP_PCB.step'
+      board_only: true
+      no_components: true
+      include_tracks: true
+      include_pads: true
+      include_zones: true
+      include_silkscreen: true
+      include_soldermask: true
+
+  # 7. STEP – FULL ASSEMBLY (PCB + COMPONENTS)
+  - name: 'STEP_Assembled'
+    comment: "STEP model with PCB and all default components"
+    type: export_3d
+    dir: 'Fabrication/STEP'
+    options:
+      format: step
+      output: '%f-STEP_Assembled.step'
+      no_components: false

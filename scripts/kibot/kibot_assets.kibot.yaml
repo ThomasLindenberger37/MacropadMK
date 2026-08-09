@@ -1,0 +1,27 @@
+kibot:
+  version: 1
+
+preflight:
+  update_xml: true
+  run_erc: false
+  run_drc: false
+
+outputs:
+  - name: README_Schema
+    type: svg_sch_print
+    dir: assets
+    options:
+      output: "%f-schematic.svg"
+
+  - name: README_3D
+    type: render_3d
+    dir: assets
+    options:
+      # Prevents the job from failing due to missing 3D models
+      # (Warnings remain, but the image is generated)
+      # fatal_3d_error: false 
+  
+      output: "%f-board_3d.png"
+      ray_tracing: true
+      width: 1920
+      height: 1080

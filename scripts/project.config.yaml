@@ -1,0 +1,19 @@
+# Project-specific automation defaults
+# CLI flags still override these values.
+
+# KiCad base name (without .kicad_pcb / .kicad_sch)
+board_name: ESP32_Shield_light
+
+# Output prefix for generated files
+# If empty, repository folder name is used.
+output_name: ESP32_Sheald_light
+
+# PCB thickness in mm for mechanical STEP export
+thickness: 1.6
+
+# Optional comma-separated drill tools forced as mechanical
+# Example: "T5" or "T3,T4"
+mechanical_tools: T5
+
+# Docker image for KiBot runs
+docker_image: ghcr.io/inti-cmnb/kicad9_auto_full:latest
