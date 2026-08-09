@@ -4,7 +4,7 @@ kibot:
 outputs:
   # 1. GERBER FILES
   - name: 'Gerber'
-    comment: "Gerber files for KiCad 9 project"
+    comment: "Gerber files for MacropadMK"
     type: gerber
     dir: 'Fabrication/Gerber'
     options:
@@ -12,6 +12,18 @@ outputs:
       use_aux_axis_as_origin: true
       plot_footprint_refs: true
       plot_footprint_values: false
+    layers:
+      - F.Cu
+      - In1.Cu
+      - In2.Cu
+      - B.Cu
+      - F.Mask
+      - B.Mask
+      - F.Silkscreen
+      - B.Silkscreen
+      - F.Paste
+      - B.Paste
+      - Edge.Cuts
 
   # 2. DRILL FILES
   - name: 'Excellon'
@@ -36,7 +48,7 @@ outputs:
 
   # 4. BILL OF MATERIALS (BoM)
   - name: 'BoM'
-    comment: "BoM for ESP32 Shield"
+    comment: "BoM for MacropadMK"
     type: bom
     dir: 'Fabrication/BoM'
     options:

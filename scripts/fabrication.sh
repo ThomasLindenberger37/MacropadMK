@@ -6,7 +6,7 @@ cd "${ROOT_DIR}"
 
 CONFIG_FILE="${CONFIG_FILE:-scripts/project.config.yaml}"
 KIBOT_CONFIG="${KIBOT_CONFIG:-scripts/kibot/config.kibot.yaml}"
-DOCKER_IMAGE="${DOCKER_IMAGE:-ghcr.io/inti-cmnb/kicad9_auto_full:latest}"
+DOCKER_IMAGE="${DOCKER_IMAGE:-ghcr.io/inti-cmnb/kicad10_auto_full:latest}"
 THICKNESS="${THICKNESS:-1.6}"
 NAME="$(basename "${ROOT_DIR}")"
 BOARD_BASE=""

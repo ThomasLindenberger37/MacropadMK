@@ -2,18 +2,18 @@
 # CLI flags still override these values.
 
 # KiCad base name (without .kicad_pcb / .kicad_sch)
-board_name: ESP32_Shield_light
+board_name: MacropadMK
 
 # Output prefix for generated files
 # If empty, repository folder name is used.
-output_name: ESP32_Sheald_light
+output_name: MacropadMK
 
 # PCB thickness in mm for mechanical STEP export
 thickness: 1.6
 
 # Optional comma-separated drill tools forced as mechanical
 # Example: "T5" or "T3,T4"
-mechanical_tools: T5
+mechanical_tools:
 
 # Docker image for KiBot runs
-docker_image: ghcr.io/inti-cmnb/kicad9_auto_full:latest
+docker_image: ghcr.io/inti-cmnb/kicad10_auto_full:latest

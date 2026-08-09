@@ -1,17 +1,18 @@
 kibot:
   version: 1
 
-preflight:
-  update_xml: true
-  run_erc: false
-  run_drc: false
-
 outputs:
   - name: README_Schema
     type: svg_sch_print
     dir: assets
     options:
       output: "%f-schematic.svg"
+
+  - name: README_Schema_PDF
+    type: pdf_sch_print
+    dir: assets
+    options:
+      output: "%f-schematic.pdf"
 
   - name: README_3D
     type: render_3d

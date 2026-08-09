@@ -44,7 +44,7 @@ Run:
 ```
 
 Behavior:
-- Always runs inside Docker image `ghcr.io/inti-cmnb/kicad9_auto_full:latest`.
+- Always runs inside Docker image `ghcr.io/inti-cmnb/kicad10_auto_full:latest`.
 
 Default output name prefix comes from `output_name` in `scripts/project.config.yaml`.
 If `output_name` is empty, repository folder name is used.
@@ -57,7 +57,7 @@ Override it with:
 Optional board base override:
 
 ```bash
-./scripts/fabrication.sh --board ESP32_Shield_light
+./scripts/fabrication.sh --board MacropadMK
 ```
 
 Optional mechanical tools override:
@@ -68,7 +68,7 @@ Optional mechanical tools override:
 
 ## Assets Script (Local)
 
-Run locally (uses Docker image `ghcr.io/inti-cmnb/kicad9_auto_full:latest`):
+Run locally (uses Docker image `ghcr.io/inti-cmnb/kicad10_auto_full:latest`):
 
 ```bash
 ./scripts/assets.sh
@@ -85,7 +85,7 @@ Override it with:
 Optional board base override:
 
 ```bash
-./scripts/assets.sh --board ESP32_Shield_light
+./scripts/assets.sh --board MacropadMK
 ```
 
 ## Project Config
@@ -95,11 +95,11 @@ Default config file: `scripts/project.config.yaml`
 Example fields:
 
 ```yaml
-board_name: ESP32_Shield_light
-output_name: ESP32_Sheald_light
+board_name: MacropadMK
+output_name: MacropadMK
 thickness: 1.6
-mechanical_tools: T5
-docker_image: ghcr.io/inti-cmnb/kicad9_auto_full:latest
+mechanical_tools:
+docker_image: ghcr.io/inti-cmnb/kicad10_auto_full:latest
 ```
 
 Both scripts read this file automatically.
@@ -123,9 +123,9 @@ Use a different config file:
 
 ```bash
 scripts/.venv/bin/python scripts/generate_step_mech.py \
-  --edge-gerber Fabrication/Gerber/ESP32_Shield_light-Edge_Cuts.gbr \
-  --drill Fabrication/Drill/ESP32_Shield_light-drill.drl \
-  --out Fabrication/STEP/ESP32_Shield_light-STEP_Mechanical.step \
+  --edge-gerber Fabrication/Gerber/MacropadMK-Edge_Cuts.gbr \
+  --drill Fabrication/Drill/MacropadMK-drill.drl \
+  --out Fabrication/STEP/MacropadMK-STEP_Mechanical.step \
   --thickness 1.6
 ```
 
@@ -133,9 +133,9 @@ To force mechanical tools explicitly:
 
 ```bash
 scripts/.venv/bin/python scripts/generate_step_mech.py \
-  --edge-gerber Fabrication/Gerber/ESP32_Shield_light-Edge_Cuts.gbr \
-  --drill Fabrication/Drill/ESP32_Shield_light-drill.drl \
-  --out Fabrication/STEP/ESP32_Shield_light-STEP_Mechanical.step \
+  --edge-gerber Fabrication/Gerber/MacropadMK-Edge_Cuts.gbr \
+  --drill Fabrication/Drill/MacropadMK-drill.drl \
+  --out Fabrication/STEP/MacropadMK-STEP_Mechanical.step \
   --thickness 1.6 \
   --mechanical-tools T3,T4
 ```

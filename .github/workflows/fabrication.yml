@@ -12,13 +12,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v7
-        with:
-          submodules: recursive
 
       - name: Run KiBot
         run: |
           chmod +x ./scripts/fabrication.sh
-          CONFIG_FILE=project.config.yaml ./scripts/fabrication.sh
+          ./scripts/fabrication.sh
 
       - name: Set artifact name
         id: artifact_name

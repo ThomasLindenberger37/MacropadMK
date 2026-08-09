@@ -1,102 +1,159 @@
 # MacropadMK
 
-This project is a compact ESPhome compatible multisensor shield. The PCB is designed so that all required components can be hand-soldered—no SMD reflow oven or pick-and-place machine is required.
-We want to eather use SMD componets that can be solderd by hand with a soldering iron or we want to use modules where the SMD sensors are presolderd. This makes it cheap but easy customizable.
+MacropadMK is a 12-key macropad built around the Waveshare ESP32-S3-Zero. The
+board combines a diode-isolated 4 × 3 keyboard matrix, three USB-C power-entry
+options, and two general-purpose JST-SH connections in a compact design.
 
-The shield is modular and prepared for multiple purposes. The primary use case is as an ESPHome sensor with multiple sensor values available.
+The PCB is intended for an accessible prototyping workflow: order bare boards,
+assemble and validate the first units by hand, then reuse the same LCSC-aware
+bill of materials for a later JLCPCB assembly run.
 
-## Features
+## Design overview
 
-- Detecting human presence with LD2410B mmWave sensor
-- Detecting motion with PIR sensor SR602
-- Measuring brightness with PT19-21C
-- 2x Onboard WS2812B LEDs for addressable color light
-- SolidState Relais TLP175A for potential free contact
-- Solder connections for several sensor modules like
-  - BME280 -> temperature, humidity and air pressure
-  - SCD40 -> CO₂, temperature and humidity
-  - SHT40 -> temperature and humidity
-  - and many others
-- QWIIC connector for connecting additional QWIIC-compatible modules if needed
+- Controller: ESP32-S3-Zero
+- Keyboard: 12 switches arranged as 4 rows × 3 columns
+- Isolation: one diode per switch
+- Matrix direction: `COL2ROW`
+- Supply rails: `BOARD_5V`, `3V3`, and `GND`
+- USB-C inputs: the controller connector plus two alternative PCB connectors
+- Expansion: two identically pinned 3-position JST-SH connectors
 
-The idea is to have one general-purpose PCB and only populate the components necessary for your use case.
+## Keyboard matrix
 
-For example, if you want to use a SCD40 sensor to measure the CO2 level in a room, you don't a SHT40 sensor since the SCD40 already provides temperature and humidity data.
+The switches form a 4-row by 3-column matrix. `ROW1` through `ROW4` are scanned
+one at a time by driving the selected row low. `COL1` through `COL3` are inputs,
+each held high by an external 10 kΩ pull-up resistor to `3V3`.
 
-## Images
+Each key is an independent branch:
 
-![Schematic](assets/schematic.svg)
-
-![Top view](assets/board_3d.png)
-
-## KiBOT Export
-
-This project uses KiBOT to automatically generate fabrication files and assets from the KiCAD project.
-
-### Installation
-
-KiBOT is containerized using Docker for easy installation and reproducibility. Make sure you have Docker installed on your system.
-
-### Usage
-
-#### Production Files (Gerber Data)
-
-To generate the fabrication files including Gerber data, drill files, and bill of materials:
-
-```bash
-docker run --rm \
-    -v "$(pwd):/home/kicad/project" \
-    -u $(id -u):$(id -g) \
-    -w /home/kicad/project \
-    --env "HOME=/tmp" \
-    ghcr.io/inti-cmnb/kicad10_auto_full:latest \
-    CONFIG_FILE=project.config.yaml ./scripts/fabrication.sh
+```text
+COLx -> switch -> diode anode -> diode cathode -> ROWx
 ```
 
-This command uses the `config.kibot.yaml` configuration file to generate production-ready files for PCB manufacturing, including Gerber files, drill data, and component placement information.
+The diode orientation is `COL2ROW`: the cathode, identified by the stripe on the
+physical diode, points toward the row line. When a selected row is low and a key
+on that row is pressed, its column input is pulled low through the switch and
+diode.
 
-#### Assets (Images for Documentation)
+| Signal group | Quantity | Scan role | External bias |
+| --- | ---: | --- | --- |
+| `ROW1`–`ROW4` | 4 | Driven low individually | None |
+| `COL1`–`COL3` | 3 | Digital inputs | 10 kΩ to `3V3` per column |
 
-To generate the images used in this README (schematics, 3D board views, etc.):
+## USB-C power architecture
+
+The ESP32-S3-Zero already has its own USB-C connector. The PCB provides two
+additional connector positions as alternative 5 V inputs:
+
+- Horizontal/right-angle: HRO `TYPE-C-31-M-12`
+- Vertical/axial: `MC-110LD-L124`, USB 2.0, 16 pins, with THT mounting tabs
+- Vertical connector LCSC/JLCPCB part number: `C3039282`
+
+The additional connectors are currently used only for power. They are still
+full USB 2.0 connector parts so that the same components and footprints can be
+reused in future designs with USB data support.
+
+Each additional receptacle follows these connection rules:
+
+- Tie all VBUS pins of that receptacle together.
+- Connect all GND pins to board ground.
+- Connect `CC1` to GND through its own 5.1 kΩ resistor.
+- Connect `CC2` separately to GND through its own 5.1 kΩ resistor.
+- Connect the connector shield to GND.
+- Leave `D+`, `D-`, `SBU1`, and `SBU2` unconnected and mark them as no-connect.
+
+Each alternative receptacle feeds the common `BOARD_5V` rail through a separate
+solder bridge. `BOARD_5V` connects to the ESP32-S3-Zero 5 V pin. An optional
+resettable fuse rated for approximately 1 A can be fitted ahead of the shared
+rail.
+
+Place 10 µF bulk capacitance and 100 nF decoupling close to the 5 V input. Route
+VBUS with approximately 0.8–1.0 mm wide traces; 0.25 mm traces are not
+recommended for a 1 A supply path.
+
+> **Power-source warning:** The board does not provide input OR-ing or reverse-
+> current isolation. Only one USB power source may be connected at a time unless
+> suitable input decoupling and source isolation are added.
+
+## Additional connectors
+
+The board provides two identically pinned 3-position JST-SH connectors with a
+1.0 mm pitch.
+
+- KiCad symbol: `Connector_Generic:Conn_01x03`
+- KiCad footprint:
+  `Connector_JST:JST_SH_SM03B-SRSS-TB_1x03-1MP_P1.00mm_Horizontal`
+
+| Pin | Signal |
+| ---: | --- |
+| 1 | `GND` |
+| 2 | `3V3` |
+| 3 | Signal |
+
+## Sourcing and assembly strategy
+
+Components should use LCSC `C` part numbers wherever practical. The same part
+numbers can be used both for loose component orders from LCSC and for JLCPCB
+assembly BOM matching.
+
+The intended manufacturing sequence is:
+
+1. Order unassembled prototype PCBs.
+2. Hand-assemble and electrically validate the first boards.
+3. Resolve ERC/DRC findings and confirm footprints, polarity, and connector
+   mechanics.
+4. Reuse the validated BOM for a later JLCPCB assembly order.
+
+## Project assets
+
+[Download the schematic as PDF](assets/MacropadMK-schematic.pdf).
+
+![MacropadMK schematic](assets/MacropadMK-schematic.svg)
+
+![MacropadMK 3D board view](assets/MacropadMK-board_3d.png)
+
+Some connector or encoder models may be absent from the rendered 3D preview if
+their STEP files are not available locally. This does not affect the Gerber or
+drill exports, but mechanical fit must still be checked before ordering.
+
+## Fabrication and documentation exports
+
+The repository contains its KiBot automation directly under `scripts/`. Docker
+is required; the scripts use the KiCad 10 KiBot image configured in
+`scripts/project.config.yaml`.
+
+Generate the schematic PDF/SVG and the 3D preview:
 
 ```bash
-docker run --rm \
-    -v "$(pwd):/home/kicad/project" \
-    -u $(id -u):$(id -g) \
-    -w /home/kicad/project \
-    --env "HOME=/tmp" \
-    ghcr.io/inti-cmnb/kicad10_auto_full:latest \
-    ./scripts/assets.sh --config project.config.yaml
+./scripts/assets.sh
 ```
 
-This command uses the `kibot_assets.kibot.yaml` configuration file to generate documentation images and assets.
+Generate Gerbers, drill files, BOM, placement data, the manufacturer ZIP, and
+STEP models:
 
-### Configuration Files
+```bash
+./scripts/fabrication.sh
+```
 
-- **scripts/kibot/config.kibot.yaml** - Shared fabrication configuration from the scripts submodule
-- **scripts/kibot/kibot_assets.kibot.yaml** - Shared assets configuration from the scripts submodule
+Generated manufacturing files are written to `Fabrication/`. The validated
+manufacturer archive is `Fabrication/MacropadMK-Gerber_Pack.zip`.
 
-### Workflow
+The relevant configuration files are:
 
-#### Assets Generation (Pre-Commit Hook)
+- `scripts/project.config.yaml` — project name, KiCad image, PCB thickness, and
+  mechanical-hole settings
+- `scripts/kibot/config.kibot.yaml` — manufacturing outputs and production
+  layers
+- `scripts/kibot/kibot_assets.kibot.yaml` — documentation PDF, SVG, and 3D
+  render outputs
 
-The asset generation should be performed before each commit to ensure that documentation images in the README are always up-to-date with the latest design changes. This is best implemented as a pre-commit hook:
+Always run KiCad ERC and DRC and review the generated Gerbers before submitting
+an order. Successful file generation does not imply that the electrical or
+mechanical design is production-ready.
 
-1. The pre-commit hook automatically runs the asset generation command before each commit
-2. If the KiCAD project has been modified, new images are generated
-3. These updated assets are included in the commit
+## Automated fabrication build
 
-This ensures that the schematic and board images in the documentation always reflect the current PCB design.
+The GitHub Actions fabrication workflow generates manufacturing artifacts when
+changes are pushed to the repository:
 
-#### Production Files (CI/CD Pipeline)
-
-Production manufacturing files are generated automatically through a GitHub Actions pipeline whenever changes are pushed to the repository:
-
-- The pipeline runs `CONFIG_FILE=project.config.yaml ./scripts/fabrication.sh`
-- Gerber files, drill data, and other manufacturing files are generated
-- These files are available as build artifacts for download from the Actions tab
-
-This automated approach ensures that fabrication files are always available and generated consistently.
-
-Notes:
-- Gerber files available from the Actions. [![Generate Fabrication Files](https://github.com/ThomasLindenberger37/MacropadMK/actions/workflows/fabrication.yml/badge.svg)](https://github.com/ThomasLindenberger37/MacropadMK/actions/workflows/fabrication.yml)
+[![Generate Fabrication Files](https://github.com/ThomasLindenberger37/MacropadMK/actions/workflows/fabrication.yml/badge.svg)](https://github.com/ThomasLindenberger37/MacropadMK/actions/workflows/fabrication.yml)

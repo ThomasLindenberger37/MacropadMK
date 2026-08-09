@@ -5,7 +5,7 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "${ROOT_DIR}"
 
 CONFIG_FILE="${CONFIG_FILE:-scripts/project.config.yaml}"
-DOCKER_IMAGE="${DOCKER_IMAGE:-ghcr.io/inti-cmnb/kicad9_auto_full:latest}"
+DOCKER_IMAGE="${DOCKER_IMAGE:-ghcr.io/inti-cmnb/kicad10_auto_full:latest}"
 KIBOT_ASSETS_CONFIG="${KIBOT_ASSETS_CONFIG:-scripts/kibot/kibot_assets.kibot.yaml}"
 NAME="$(basename "${ROOT_DIR}")"
 BOARD_BASE=""
@@ -87,5 +87,8 @@ docker run --rm \
   "${DOCKER_IMAGE}" \
   kibot -c "${KIBOT_ASSETS_CONFIG}" -b "${BOARD_FILE}" -e "${SCHEMATIC_FILE}"
 
-cp "assets/${BOARD_BASE}-schematic.svg" "assets/${NAME}-schematic.svg"
-cp "assets/${BOARD_BASE}-board_3d.png" "assets/${NAME}-board_3d.png"
+if [[ "${BOARD_BASE}" != "${NAME}" ]]; then
+  cp "assets/${BOARD_BASE}-schematic.svg" "assets/${NAME}-schematic.svg"
+  cp "assets/${BOARD_BASE}-schematic.pdf" "assets/${NAME}-schematic.pdf"
+  cp "assets/${BOARD_BASE}-board_3d.png" "assets/${NAME}-board_3d.png"
+fi
