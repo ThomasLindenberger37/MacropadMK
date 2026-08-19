@@ -147,11 +147,11 @@
       },
       "rules": {
         "max_error": 0.005,
-        "min_clearance": 0.0,
+        "min_clearance": 0.01,
         "min_connection": 0.0,
         "min_copper_edge_clearance": 0.5,
         "min_groove_width": 0.0,
-        "min_hole_clearance": 0.25,
+        "min_hole_clearance": 0.1,
         "min_hole_to_hole": 0.25,
         "min_microvia_diameter": 0.2,
         "min_microvia_drill": 0.1,
@@ -680,7 +680,7 @@
         "uuid": "8aac3481-571f-4367-bd23-185f621364a9"
       }
     ],
-    "used_designators": "H1-6,SW1-14,#PWR2-3,#PWR5-6,#PWR11-12,#PWR14-21,#PWR23-30,D3-19,DS1,R5-8,R10-28,J1-3,J5-7,F1-3",
+    "used_designators": "H1-6,SW1-14,#PWR2-3,#PWR5-6,#PWR11-12,#PWR14-21,#PWR23-32,D3-19,DS1,R1,R5-8,R10-30,J1-3,J5-7,F1-3,Q1-2,C4",
     "variants": []
   },
   "sheets": [
